@@ -1,0 +1,43 @@
+*.pyc
+*.py~
+.DS_Store
+conf.py
+latest_updates.json
+.wnf-lang-status
+*.egg-info
+dist/
+erpnext/public/dist
+erpnext/docs/current
+*.swp
+*.swo
+__pycache__
+*~
+.idea/
+.vscode/
+.helix/
+node_modules/
+.backportrc.json
+# Aider AI Chat
+.aider*
+
+# Banking SPA
+erpnext/public/banking
+erpnext/www/banking.html
+banking/dist/
+
+# Environment and Secrets
+.env
+.env.*
+!.env.example
+!.env.production
+
+# Cloudflare & Wrangler
+.wrangler/
+cloudflared/credentials.json
+cloudflared/*.pem
+
+# OS & Temp
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
