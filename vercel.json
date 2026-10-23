@@ -1,0 +1,18 @@
+{
+  "builds": [
+    {
+      "src": "banking/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "banking/dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/banking/index.html",
+      "status": 200
+    }
+  ]
+}
