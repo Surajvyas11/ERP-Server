@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ lang }}" dir="{{layout_direction}}">
+<html lang="en" dir="ltr">
 
 <head>
   <meta charset="UTF-8" />
@@ -17,32 +17,37 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="white">
   <meta name="mobile-web-app-capable" content="yes">
-  <link rel="shortcut icon" href="{{ favicon or ' /assets/erpnext/images/erpnext-favicon.svg' }}" type="image/x-icon">
-  <link rel="icon" href="{{ favicon or ' /assets/erpnext/images/erpnext-favicon.svg' }}" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Banking | {{ app_name }}</title>
+  <title>Banking | ERPNext</title>
 </head>
 
 <body>
   <div id="root"></div>
-  <script>window.csrf_token = '{{ frappe.session.csrf_token }}';
+  <script>
+    // Initialize minimal frappe globals for static deployment
     if (!window.frappe) window.frappe = {};
-
-    frappe.boot = JSON.parse({{ boot }});
-    frappe.boot.layout_direction = "{{ layout_direction }}";
-
-    frappe._translations_loaded = fetch(
-      `/api/method/frappe.translate.get_boot_translations?v=${frappe.boot.translations_version}&lang=${frappe.boot.lang}`,
-      {
-        credentials: "same-origin",
-        headers: {
-          "X-Frappe-CSRF-Token": frappe.csrf_token,
-          "Accept": "application/json"
-        }
-      }
-    ).then(r => r.json()).then(data => {
-      frappe._messages = data.message || {};
-    }).catch(() => { });
+    if (!window.frappe.boot) {
+      window.frappe.boot = {
+        sitename: '',
+        layout_direction: 'ltr',
+        desk_theme: 'Automatic',
+        lang: 'en',
+        user: { name: 'Administrator' },
+        docs: []
+      };
+    }
+    if (!window.frappe.model) {
+      window.frappe.model = {
+        sync: function() {}
+      };
+    }
+    if (!window.frappe._messages) {
+      window.frappe._messages = {};
+    }
+    window.frappe._translations_loaded = Promise.resolve();
+    window.csrf_token = 'static';
   </script>
   <script type="module" src="/src/main.tsx"></script>
 </body>
