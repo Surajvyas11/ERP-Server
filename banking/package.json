@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --base=/assets/erpnext/banking/ && yarn copy-html-entry",
-    "build:pages": "vite build --base=/ --outDir dist && cp index.html ./dist/index.html",
+    "build:pages": "vite build --base=/ --outDir dist",
     "lint": "eslint .",
     "preview": "vite preview",
     "copy-html-entry": "cp index.html ./dist/index.html"
